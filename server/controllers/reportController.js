@@ -1,20 +1,3 @@
-// // controllers/reportController.js
-// export const reportItem = async (req, res) => {
-// try {
-// const { type, itemName, location, description, contact, time } = req.body;
-
-// // Simulating saving data to the database
-// // Here, you would typically save the data to MongoDB or another database
-
-// console.log('Received Report:', { type, itemName, location, description, contact, time });
-
-// // Respond with success
-// res.status(200).json({ message: 'Report submitted successfully!' });
-// } catch (error) {
-// console.error('Error:', error);
-// res.status(500).json({ message: 'Internal Server Error' });
-// }
-// };
 
 // controllers/reportController.js
 import Report from "../models/Report.js";
@@ -24,6 +7,8 @@ import Report from "../models/Report.js";
 export const reportItem = async (req, res) => {
 	try {
 		const { type, itemName, location, description, time , userId} = req.body;
+		
+		console.log(req.body);
 		
 		const formattedTime = new Date(time)
 
@@ -115,5 +100,4 @@ export const getMatches = async (req, res) => {
 		res.status(500).json({ error: "Failed to fetch matches" });
 	}
 };
-
 

@@ -30,12 +30,13 @@ const ViewReportedItems = () => {
     };
 
     fetchData();
-  }, []);
+  }, [backendUrl]);
+  
 
   // Handle claiming the report
   const handleClaim = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/reports/claim/${id}`, {
+      const response = await fetch(`http://localhost:4000/api/report/claim-item/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +63,7 @@ const ViewReportedItems = () => {
   // Handle deleting the report
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/reports/${id}`, {
+      const response = await fetch(`http://localhost:4000/api/report/delete-item/${id}`, {
         method: 'DELETE',
       });
 
@@ -94,6 +95,7 @@ const ViewReportedItems = () => {
               <p><strong>Location:</strong> {item.location}</p>
               <p><strong>Description:</strong> {item.description}</p>
               <p><strong>Contact:</strong> {item.reportedBy?.name}</p>
+              <p><strong>Type:</strong> {item.type}</p>
               <div className='flex gap-x-4 my-4 '>
               {item.status === "unclaimed" ? (
                 <button

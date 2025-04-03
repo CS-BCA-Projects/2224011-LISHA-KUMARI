@@ -6,8 +6,6 @@ export const AppContextProvider =(props)=>{
 
     const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-
-
     const [isLoggedin, setIsLoggedin]= useState(localStorage.getItem('isLogin') === 'true')
     const [userData, setUserData]= useState(() => {
         const user = localStorage.getItem('userData')

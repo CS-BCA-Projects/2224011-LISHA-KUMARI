@@ -76,8 +76,11 @@ const Navbar = ({ isAdmin }) => {
                 <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
                   <ul className="py-2">
                     <li onClick={logout} className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-red-500">
-                      Logout
+                      Logout        
                     </li>
+
+                   
+
                   </ul>
                 </div>
               )}

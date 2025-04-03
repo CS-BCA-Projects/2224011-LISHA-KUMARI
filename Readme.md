@@ -31,5 +31,3 @@ A **Lost and Found** web application built using the **MERN (MongoDB, Express.js
 ```sh
 git clone https://github.com/yourusername/lost-and-found.git
 cd lost-and-found
-
-

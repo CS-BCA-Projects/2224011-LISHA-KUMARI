@@ -11,12 +11,12 @@ const BrowseLostFound = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/reports');
+        const response = await fetch('http://localhost:4000/api/report/all-item-reports');
         if (!response.ok) {
           throw new Error('Failed to fetch items');
         }
         const data = await response.json();
-        setItems(data); // Set the data into state
+        setItems(data.items || []); // Set the data into state
       } catch (err) {
         setError(err.message); // Handle errors
         console.error('Error fetching items:', err);

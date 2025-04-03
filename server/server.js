@@ -27,7 +27,9 @@ app.use(cookieParser());
 
 
 //API ENDPOINTS
-
+app.get('/',(req,res) => {
+  res.send("hello")
+})
 app.use('/api/auth', authRouter)
 app.use('/api/user', userRouter)
 app.use('/api/report', reportRouter)
