@@ -9,12 +9,13 @@ import AdminDashboard from './pages/Dashboard/AdminDashboard.jsx'
 import Login from './pages/Credentials/Login.jsx'
 import ReportItem from './pages/Items/ReportItem.jsx'
 import ViewReportedItems from './pages/Items/ViewReortedItems.jsx'
-import Notification from '../../server/models/Notification.js'
+import Notifications from './pages/Notification.jsx'
 import Contact from './pages/Contact.jsx'
 import UpdateReportedItem from './pages/Items/UpdateReportItem.jsx'
 import EmailVerify from './pages/Credentials/EmailVerify.jsx'
 import ResetPassword from './pages/Credentials/ResetPassword.jsx'
 import BrowseLostFound from './pages/Items/BrowseLostFound.jsx'
+import AdminMatch from './pages/Dashboard/AdminMatch.jsx'
 
 
 const router = createBrowserRouter([
@@ -25,6 +26,13 @@ const router = createBrowserRouter([
     <Home/>
   )
   },
+
+  {
+    path: '/admin-match',
+    element: (<AdminMatch/>
+    )
+  }, 
+
   {
     path : '/admin',
     element :( <AdminDashboard/>
@@ -62,7 +70,7 @@ const router = createBrowserRouter([
   {
     path : '/notifications',
     element :(
-       <Notification/>
+       <Notifications/>
     )
   },
   {

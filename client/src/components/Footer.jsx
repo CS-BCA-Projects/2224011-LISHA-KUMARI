@@ -1,3 +1,4 @@
+// Footer.jsx
 import React from "react";
 
 const Footer = () => {
@@ -11,8 +12,8 @@ const Footer = () => {
         <div>
           <h4 className="font-semibold mb-4">Quick Links</h4>
           <ul className="space-y-2">
-            <li><a href="#" className="text-gray-400 hover:text-white">Report Lost</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white">Report Found</a></li>
+            <li><a href="/report/lost" className="text-gray-400 hover:text-white">Report Lost</a></li>
+            <li><a href="/report/found" className="text-gray-400 hover:text-white">Report Found</a></li>
           </ul>
         </div>
         <div>

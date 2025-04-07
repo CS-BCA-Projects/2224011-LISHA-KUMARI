@@ -7,9 +7,7 @@ import { toast , ToastContainer } from 'react-toastify'
 
 const Login = () => {
   const navigate = useNavigate();
-
   const { backendUrl, setIsLoggedin, setUserData } = useContext(AppContent);
-
   const [state, setState] = useState('Sign Up');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -20,7 +18,8 @@ const Login = () => {
     try {
       let response;
       if (state === 'Sign Up') {
-        response = await axios.post(`${backendUrl}/api/auth/register`, { name, email, password } , {
+        response = await axios.post(`${backendUrl}/api/auth/register`,
+           { name, email, password , isAdmin: false} , {
           withCredentials : true
         });
       } else {
@@ -29,14 +28,19 @@ const Login = () => {
         });
       }
 
-      const { data }  = response;
-
-      
+      const { data }  = response;  
       if (data.success) {
         setIsLoggedin(true);
         setUserData(data?.userData);
+        // Store token in localStorage for consistency (optional)
+        localStorage.setItem("token", data.token || ""); // Add token to response if not present
         setTimeout(()=>{
+          if(data.userData.isAdmin){
+            navigate('/admin')
+          }
+          else{
           navigate('/');
+          }
         } , 1000)
         toast.success('Logging you in')
       } else {

@@ -1,27 +1,31 @@
 // middlewares/authMiddleware.js
+import jwt from "jsonwebtoken";
+import userModel from "../models/userModel.js";
 
-import jwt from 'jsonwebtoken';
-
-export const protectAdmin = (req, res, next) => {
-  const token = req.headers.authorization?.split(' ')[1];
+export const protectAdmin = async (req, res, next) => {
+  // Check token from Authorization header or cookies
+  const token =
+    req.headers.authorization?.split(" ")[1] || req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({ message: 'Not authorized' });
+    return res.status(401).json({ success: false, message: "Not authorized, no token" });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // Store the user data in the request
+    const user = await userModel.findById(decoded.id).select("isAdmin email name");
+    if (!user) {
+      return res.status(401).json({ success: false, message: "User not found" });
+    }
+    if (!user.isAdmin) {
+      return res.status(403).json({ success: false, message: "Access denied. Admins only." });
+    }
+    req.user = user; // Attach full user object to req
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Not authorized, invalid token' });
+    res.status(401).json({ success: false, message: "Not authorized, invalid token" });
   }
 };
 
-export const isAdmin = (req, res, next) => {
-    if (req.user.role !== 'admin') {
-      return res.status(403).json({ message: 'Access denied' });
-    }
-    next();
-  };
-  
+// Export only protectAdmin since isAdmin is redundant
+export default protectAdmin;

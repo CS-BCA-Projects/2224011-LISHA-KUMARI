@@ -29,8 +29,19 @@ const reportSchema = new mongoose.Schema({
 		enum: ["unclaimed", "claimed"],
 		default: "unclaimed",
 	},
-  belongsTo: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+  	belongsTo: { 
+		type: mongoose.Schema.Types.ObjectId, ref: "User" 
+	},
+	matchedWith: { 
+		type: mongoose.Schema.Types.ObjectId,
+		ref: "Report", default: null
+	 }, // Reference to matched report
+  	isMatched: { 
+		type: Boolean, 
+		default: false },  // Flag for matching status
+
 });
+
 
 const Report = mongoose.model("Report", reportSchema);
 

@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     isAccountVerified: {type: Boolean, default: false}, 
     resetOtp: {type: String, default: ''},
     resetOtpExpireAt: {type: Number, default: 0},
-    role : {type : String , enum : ['user' , 'admin'] , default : 'user'}
+    isAdmin: { type: Boolean, default: false }, // Explicitly define isAdmin
 })
 
 const userModel = mongoose.models.user || mongoose.model('User', userSchema);

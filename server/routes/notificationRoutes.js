@@ -1,5 +1,6 @@
 import express from 'express';
 import Notification from '../models/Notification.js';
+import userAuth from "../middleware/userAuth.js";
 
 const router = express.Router();
 
@@ -16,12 +17,12 @@ router.post('/create', async (req, res) => {
 });
 
 // Get notifications for a user
-router.get('/:userId', async (req, res) => {
+router.get("/:userId", userAuth, async (req, res) => {
   try {
     const notifications = await Notification.find({ userId: req.params.userId });
-    res.json(notifications);
+    res.status(200).json(notifications);
   } catch (error) {
-    res.status(500).json({ success: false, error: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 
