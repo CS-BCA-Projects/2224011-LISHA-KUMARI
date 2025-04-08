@@ -1,8 +1,10 @@
 // src/pages/BrowseLostFound.jsx
-import React, { useEffect, useState } from 'react';
-
+import React, { useContext, useEffect, useState } from 'react';
+import { AppContent } from '../../context/AppContext'; // Import context
+import axios from "axios";
 
 const BrowseLostFound = () => {
+  const { backendUrl, userData } = useContext(AppContent); // Access context
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState(''); // For filtering by 'lost' or 'found'
@@ -12,15 +14,18 @@ const BrowseLostFound = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await fetch('http://localhost:4000/api/report/all-item-reports');
-        if (!response.ok) {
-          throw new Error('Failed to fetch items');
+        const response = await axios.get(`${backendUrl}/api/report/all-item-reports`, {
+          withCredentials: true, // Send cookies/session
+        });
+       
+        console.log("Full API Response:", response.data); // Log the full response
+        if (response.data.success === false) {
+          throw new Error(response.data.message || "Failed to fetch items");
         }
-        const data = await response.json();
-        setItems(data.items || []); // Set the data into state
+        setItems(response.data.allItems || [])
       } catch (err) {
-        setError(err.message); // Handle errors
-        console.error('Error fetching items:', err);
+        setError(err.response?.data?.message || err.message);
+        console.error("Error fetching items:", err.response?.data || err.message);
       }
     };
 
@@ -86,7 +91,7 @@ const BrowseLostFound = () => {
               <h3 className="font-semibold text-lg">{item.itemName}</h3>
               <p><strong>Location:</strong> {item.location}</p>
               <p><strong>Description:</strong> {item.description}</p>
-              <p><strong>Contact:</strong> {item.contact}</p>
+              <p><strong>Contact:</strong> {item.reportedBy?.email || "N/A"}</p>
               <p><strong>Status:</strong> {item.type}</p>
             </div>
           ))
