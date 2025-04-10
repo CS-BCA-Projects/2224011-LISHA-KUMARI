@@ -12,7 +12,9 @@ const Contact = () => {
   const { backendUrl, userData } = useContext(AppContent);
   const userId = userData?._id || null;
 
-  console.log("User ID:", userId);
+  useEffect(() => {
+    console.log("User ID:", userId);
+  }, [userId]);
 
   // Fetch Messages
   useEffect(() => {
@@ -24,6 +26,7 @@ const Contact = () => {
         setMessages(response.data || []);
       } catch (error) {
         console.error("Error fetching messages:", error);
+        alert("Failed to load messages. Check console for details.");
       }
     };
 
@@ -50,14 +53,13 @@ const Contact = () => {
   // Send Message
   const sendMessage = async () => {
     if (!selectedUser || !message.trim()) return alert("Select a user and enter a message.");
-
+  
     try {
       const response = await axios.post(
         `${backendUrl}/api/contact/send`,
         {
           senderId: userId,
           receiverId: selectedUser,
-          reportId: "123456789", // Replace with dynamic reportId if needed
           message,
         },
         { withCredentials: true }

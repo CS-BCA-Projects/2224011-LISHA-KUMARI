@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const contactSchema = new mongoose.Schema({
   senderId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   receiverId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-  reportId: { type: mongoose.Schema.Types.ObjectId, ref: "Report", required: true },
+  reportId: { type: mongoose.Schema.Types.ObjectId, ref: "Report", required: false }, // Changed to optional
   message: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
