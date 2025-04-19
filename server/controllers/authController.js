@@ -216,6 +216,7 @@ export const sendResetOtp = async(req, res)=>{
         return res.json({success: true, message: 'OTP sent to your email'});
 
     }catch(error){
+        console.error("Error sending reset OTP:", error);
         res.json({success:false, message: error.message})
     }
 }
