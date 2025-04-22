@@ -41,4 +41,4 @@ app.use('/api/contact', contactRouter)
 app.use('/api/admin', adminRoutes);
 app.use('/api/notifications', notificationRouter)
 
-app.listen(port, ()=>console.log(`Server started on PORT:${port}`));
+app.listen(port,'0.0.0.0', ()=>console.log(`Server started on PORT:${port}`));
