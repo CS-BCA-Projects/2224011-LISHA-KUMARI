@@ -36,7 +36,7 @@ const ViewReportedItems = () => {
   // Handle claiming the report
   const handleClaim = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/report/claim-item/${id}`, {
+      const response = await fetch(`${backendUrl}/api/report/claim-item/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ const ViewReportedItems = () => {
   // Handle deleting the report
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/report/delete-item/${id}`, {
+      const response = await fetch(`${backendUrl}/api/report/delete-item/${id}`, {
         method: 'DELETE',
       });
 

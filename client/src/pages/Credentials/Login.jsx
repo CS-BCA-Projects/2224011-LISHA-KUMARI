@@ -12,6 +12,7 @@ const Login = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const Login = () => {
           withCredentials : true
         });
       } else {
-        response = await axios.post(`${backendUrl}/api/auth/login`, { email, password } , {
+        response = await axios.post(`${BACKEND_URL}/api/auth/login`, { email, password } , {
           withCredentials : true
         });
       }
