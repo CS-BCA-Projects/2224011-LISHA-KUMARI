@@ -4,7 +4,7 @@ export const AppContent = createContext()
 
 export const AppContextProvider =(props)=>{
 
-    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://13.219.200.252:4000'
 
     const [isLoggedin, setIsLoggedin]= useState(localStorage.getItem('isLogin') === 'true')
     const [userData, setUserData]= useState(() => {
